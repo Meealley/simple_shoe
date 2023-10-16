@@ -17,26 +17,41 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 12),
+      padding: const EdgeInsets.symmetric(vertical: 12),
       child: Card(
-        // color: Colors.amber,
-        child: Column(
-          children: [
-            Text(title),
-            SizedBox(
-              height: 12,
-            ),
-            Text('\$$price'),
-            SizedBox(
-              height: 12,
-            ),
-            Image(
-              image: AssetImage(
-                image,
+        color: Colors.amber,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        child: Padding(
+          padding: const EdgeInsets.all(18),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: GoogleFonts.epilogue(
+                    textStyle:
+                        const TextStyle(fontSize: 21, fontWeight: FontWeight.bold)),
               ),
-              height: 170,
-            )
-          ],
+              const SizedBox(
+                height: 20,
+              ),
+              Text(
+                '\$$price',
+                style: GoogleFonts.epilogue(textStyle: const TextStyle(fontSize: 23)),
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              Center(
+                child: Image(
+                  image: AssetImage(
+                    image,
+                  ),
+                  height: 170,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
