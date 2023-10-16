@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:simple_shoe_app/pages/global_variable.dart';
+import 'package:simple_shoe_app/pages/product_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,6 +18,14 @@ class _HomeScreenState extends State<HomeScreen> {
     "Balenciaga",
     "Nike"
   ];
+  late String selectedfilters;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    selectedfilters = filters[0];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -66,21 +76,44 @@ class _HomeScreenState extends State<HomeScreen> {
                     final filter = filters[index];
                     return Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: Chip(
-                        padding: EdgeInsets.all(10),
-                        label: Text(
-                          filter,
-                          style: GoogleFonts.epilogue(
-                              textStyle: TextStyle(
-                            fontSize: 16,
-                          )),
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            selectedfilters = filter;
+                          });
+                        },
+                        child: Chip(
+                          padding: const EdgeInsets.all(10),
+                          backgroundColor: selectedfilters == filter
+                              ? Colors.amber
+                              : Colors.blue.shade100,
+                          label: Text(
+                            filter,
+                            style: GoogleFonts.epilogue(
+                                textStyle: const TextStyle(
+                              fontSize: 16,
+                            )),
+                          ),
                         ),
                       ),
                     );
                   },
                   itemCount: filters.length,
                 ),
-              )
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: products.length,
+                  itemBuilder: ((context, index) {
+                    final product = products[index];
+                    return ProductCard(
+                      title: product['title'] as String,
+                      price: product['price'] as double,
+                      image: product['imageUrl'] as String,
+                    );
+                  }),
+                ),
+              ),
             ],
           ),
         ),

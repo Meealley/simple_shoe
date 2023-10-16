@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:simple_shoe_app/pages/home_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -15,9 +15,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellow.shade300),
         inputDecorationTheme:
-            const InputDecorationTheme(prefixIconColor: Colors.grey),
+            InputDecorationTheme(prefixIconColor: Colors.grey),
       ),
-      home: const HomeScreen(),
+      home: HomeScreen(),
     );
   }
 }
