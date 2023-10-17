@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ProductDetailsPage extends StatelessWidget {
+class ProductDetailsPage extends StatefulWidget {
   const ProductDetailsPage({super.key, required this.product});
   final Map<String, Object> product;
+
+  @override
+  State<ProductDetailsPage> createState() => _ProductDetailsPageState();
+}
+
+class _ProductDetailsPageState extends State<ProductDetailsPage> {
+  int selectedSize = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +23,10 @@ class ProductDetailsPage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          Text(product['title'] as String,
+          Text(widget.product['title'] as String,
               style: Theme.of(context).textTheme.titleMedium),
           const Spacer(),
-          Image.asset(product['imageUrl'] as String),
+          Image.asset(widget.product['imageUrl'] as String),
           const Spacer(
             flex: 3,
           ),
@@ -31,12 +38,13 @@ class ProductDetailsPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  '\$${product['price']}',
+                  '\$${widget.product['price']}',
                   style: GoogleFonts.epilogue(
-                      textStyle:
-                          const TextStyle(fontSize: 23, fontWeight: FontWeight.bold)),
+                      textStyle: const TextStyle(
+                          fontSize: 23, fontWeight: FontWeight.bold)),
                 ),
                 const SizedBox(
                   height: 12,
@@ -45,15 +53,26 @@ class ProductDetailsPage extends StatelessWidget {
                   height: 50,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
-                    itemCount: (product['sizes'] as List<int>).length,
+                    itemCount: (widget.product['sizes'] as List<int>).length,
                     itemBuilder: (context, index) {
-                      final size = (product['sizes'] as List<int>)[index];
+                      final size =
+                          (widget.product['sizes'] as List<int>)[index];
 
                       return Padding(
                         padding: const EdgeInsets.all(4.0),
-                        child: Chip(
-                          label: Text(
-                            size.toString(),
+                        child: GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              selectedSize = size;
+                            });
+                          },
+                          child: Chip(
+                            label: Text(
+                              size.toString(),
+                            ),
+                            backgroundColor: selectedSize == size
+                                ? Colors.amber
+                                : Colors.transparent,
                           ),
                         ),
                       );
@@ -63,18 +82,21 @@ class ProductDetailsPage extends StatelessWidget {
                 const SizedBox(
                   height: 12,
                 ),
-                ElevatedButton(
-                    style: const ButtonStyle(
-                      minimumSize: MaterialStatePropertyAll(
-                        Size(double.infinity, 50),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                      style: const ButtonStyle(
+                        minimumSize: MaterialStatePropertyAll(
+                          Size(double.infinity, 50),
+                        ),
                       ),
-                    ),
-                    onPressed: () {},
-                    child: Text(
-                      'Add to cart',
-                      style: GoogleFonts.epilogue(
-                          textStyle: const TextStyle(fontSize: 17)),
-                    ))
+                      onPressed: () {},
+                      child: Text(
+                        'Add to cart',
+                        style: GoogleFonts.epilogue(
+                            textStyle: const TextStyle(fontSize: 18)),
+                      )),
+                )
               ],
             ),
           )

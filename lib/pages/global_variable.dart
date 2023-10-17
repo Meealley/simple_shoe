@@ -2,7 +2,7 @@ final products = [
   {
     'id': "0",
     'title': 'Men\'s Nike shoe',
-    'price': 44.53,
+    'price': 230.53,
     'sizes': [8, 9, 10, 11],
     'imageUrl': 'assets/images/nikee.png',
     'company': "Nike",
@@ -10,7 +10,7 @@ final products = [
   {
     'id': "1",
     'title': 'Men\'s Nike shoe',
-    'price': 44.53,
+    'price': 120.32,
     'sizes': [8, 9, 10, 11],
     'company': "Nike",
     'imageUrl': 'assets/images/nike_red.png',
@@ -18,7 +18,7 @@ final products = [
   {
     'id': "2",
     'title': 'Men\'s Addidas shoe',
-    'price': 50.13,
+    'price': 300.13,
     'sizes': [8, 9, 10, 11],
     'company': "Addidas",
     'imageUrl': 'assets/images/addidas_wht.png',
@@ -26,7 +26,7 @@ final products = [
   {
     'id': "3",
     'title': 'Men\'s Addidas shoe',
-    'price': 23.33,
+    'price': 356.33,
     'sizes': [8, 9, 10, 11],
     'company': "Addidas",
     'imageUrl': 'assets/images/addidas_blue.png'
