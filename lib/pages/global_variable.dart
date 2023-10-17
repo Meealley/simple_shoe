@@ -38,7 +38,7 @@ final cart = [
     'id': "3",
     'title': 'Men\'s Addidas shoe',
     'price': 23.33,
-    'sizes': 10,
+    'size': 10,
     'company': "Addidas",
     'imageUrl': 'assets/images/addidas_blue.png'
   }

@@ -12,7 +12,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final List<Widget> _pages = [const ProductList(), const FavoritePage(), const CartPage()];
+  final List<Widget> _pages = [
+    const ProductList(),
+    const FavoritePage(),
+    const CartPage()
+  ];
   int currentPage = 0;
 
   // Define your individual pages or screens here.
