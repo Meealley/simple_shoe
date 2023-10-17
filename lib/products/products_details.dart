@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:simple_shoe_app/pages/cart_provider.dart';
 
 class ProductDetailsPage extends StatefulWidget {
   const ProductDetailsPage({super.key, required this.product});
@@ -11,6 +13,47 @@ class ProductDetailsPage extends StatefulWidget {
 
 class _ProductDetailsPageState extends State<ProductDetailsPage> {
   int selectedSize = 0;
+
+  void onTap() {
+    if (selectedSize != 0) {
+      Provider.of<CartProvider>(context, listen: false).addProduct(
+        {
+          'id': widget.product['id'],
+          'title': widget.product['title'],
+          'price': widget.product['price'],
+          'size': selectedSize,
+          'company': widget.product['company'],
+          'imageUrl': widget.product['imageUrl']
+        },
+      );
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            duration: const Duration(seconds: 1),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(17)),
+            content: SizedBox(
+              height: 180,
+              child: Text(
+                "Product added 👍🏽",
+                style: GoogleFonts.epilogue(fontSize: 18),
+              ),
+            )),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(17)),
+            content: SizedBox(
+              height: 180,
+              child: Text(
+                "Please select a size!☺️",
+                style: GoogleFonts.epilogue(fontSize: 18),
+              ),
+            )),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -90,7 +133,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
                           Size(double.infinity, 50),
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: onTap,
                       child: Text(
                         'Add to cart',
                         style: GoogleFonts.epilogue(
