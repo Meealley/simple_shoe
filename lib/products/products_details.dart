@@ -69,7 +69,7 @@ class _ProductDetailsPageState extends State<ProductDetailsPage> {
           Text(widget.product['title'] as String,
               style: Theme.of(context).textTheme.titleMedium),
           const Spacer(),
-          Image.asset(widget.product['imageUrl'] as String),
+          Image.asset(widget.product['imageUrl'].toString()),
           const Spacer(
             flex: 3,
           ),

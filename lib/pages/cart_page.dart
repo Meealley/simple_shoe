@@ -9,8 +9,9 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cart = Provider.of<CartProvider>(context).cart;
-
+    // final cart = Provider.of<CartProvider>(context).cart;
+    //or
+    final cart = context.watch<CartProvider>().cart;
     return Scaffold(
       appBar: AppBar(
         title: const Text("Cart Page"),
@@ -49,8 +50,8 @@ class CartPage extends StatelessWidget {
                               title: Text(
                                 "Delete Product",
                                 style: GoogleFonts.epilogue(
-                                    textStyle:
-                                        const TextStyle(fontWeight: FontWeight.w500)),
+                                    textStyle: const TextStyle(
+                                        fontWeight: FontWeight.w500)),
                               ),
                               content: Text(
                                 "Please ensure that you know what you want before deleting",
@@ -60,9 +61,14 @@ class CartPage extends StatelessWidget {
                               actions: [
                                 TextButton(
                                     onPressed: () {
-                                      Provider.of<CartProvider>(context,
-                                              listen: false)
+                                      // Provider.of<CartProvider>(context,
+                                      //         listen: false)
+                                      //     .removeProduct(cartItem);
+
+                                      context
+                                          .read<CartProvider>()
                                           .removeProduct(cartItem);
+
                                       Navigator.of(context).pop();
                                     },
                                     child: Text(
@@ -78,7 +84,8 @@ class CartPage extends StatelessWidget {
                                     child: Text(
                                       "No",
                                       style: GoogleFonts.epilogue(
-                                          textStyle: const TextStyle(fontSize: 16)),
+                                          textStyle:
+                                              const TextStyle(fontSize: 16)),
                                     )),
                               ],
                             );
