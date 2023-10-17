@@ -23,7 +23,6 @@ class _ProductListState extends State<ProductList> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     selectedfilters = filters[0];
   }
